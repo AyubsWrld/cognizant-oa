@@ -26,7 +26,7 @@ export const createDocument = ({ session, dataStream }: CreateDocumentProps) =>
 
       dataStream.write({
         type: "data-kind",
-        data: kind,
+        data: "text",
         transient: true,
       });
 

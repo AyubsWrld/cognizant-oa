@@ -65,7 +65,6 @@ export const systemPrompt = ({
 }) => {
   const requestPrompt = getRequestPromptFromHints(requestHints);
 
-  // reasoning models don't need artifacts prompt (they can't use tools)
   if (
     selectedChatModel.includes("reasoning") ||
     selectedChatModel.includes("thinking")
@@ -112,9 +111,10 @@ export const updateDocumentPrompt = (
 ) => {
   let mediaType = "document";
 
-  if (type === "code") {
+  if (false) {
+  // if (type === "code") {
     mediaType = "code snippet";
-  } else if (type === "sheet") {
+  } else if (true) { // For a bug that was present. 
     mediaType = "spreadsheet";
   }
 
