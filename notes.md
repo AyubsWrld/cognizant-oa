@@ -1,0 +1,64 @@
+- **app**
+    - [[note]]: Entry point. This is where I put the (auth) and (chat) route segments. 
+    - [[child]]: Route Segment (chat).
+        - [[child]]: (chat)
+    - [[child]]: Route Segment (auth)
+- artifacts 
+    - [[note]]:  essentially specialized document formats with custom rendering, editing capabilities, and interactive features.
+            How to initialize the artifact (loading metadata like suggestions)
+            How to handle streaming updates as content is generated
+            How to render the content
+            What actions are available (undo/redo, copy, view changes)
+            What toolbar options appear (like "add final polish")
+    - [[child]]: code
+    - [[child]]: image
+    - [[child]]: sheet
+    - [[child]]: text
+    - [[child]]: actions.ts
+- components
+    - [[note]]: Components
+- hooks
+    - [[note]]: Hooks
+    - [[child]]: use-artifact.ts
+    - [[child]]: use-auto-resume.ts
+    - [[child]]: use-chat-visibility.ts
+    - [[child]]: use-messages.tsx
+    - [[child]]: use-mobile.ts
+    - [[child]]: use-scroll-to-bottom.tsx
+- lib
+    - [[note]]: 
+    - [[child]]: ai
+        - [[child]]: tools
+            - [[note]]: 
+            - [[child]]: create-document.ts
+            - [[child]]: get-weather.ts
+            - [[child]]: request-suggestions.ts
+            - [[child]]: update-document.ts
+        - [[child]]: entitlements.ts
+        - [[child]]: models.mock.ts
+        - [[child]]: models.test.ts
+        - [[child]]: models.ts
+        - [[child]]: prompts.ts
+        - [[child]]: providers.ts
+        - [[note]]: 
+    - [[child]]: artifacts
+        - [[note]]: 
+        - [[child]]: server.ts
+    - [[child]]: db
+        - [[note]]: 
+        - [[child]]: helpers
+        - [[child]]: migrations
+        - [[child]]: migrate.ts
+        - [[child]]: queries.ts
+        - [[child]]: schema.ts
+        - [[child]]: utils.ts
+    - [[child]]: editor
+        - [[child]]: config.ts
+        - [[child]]: diff.js
+        - [[child]]: functions.tsx
+        - [[child]]: react-renderer.tsx
+        - [[child]]: suggestions.tsx
+    - [[child]]: constants.ts
+    - [[child]]: errors.ts
+    - [[child]]: types.ts
+    - [[child]]: utils.ts
