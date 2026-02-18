@@ -1,8 +1,8 @@
 "use client";
-
 import type { UseChatHelpers } from "@ai-sdk/react";
 import { motion } from "framer-motion";
 import { memo } from "react";
+import { Cloud, Code, Building2, Lightbulb } from "lucide-react";
 import type { ChatMessage } from "@/lib/types";
 import { Suggestion } from "./elements/suggestion";
 import type { VisibilityType } from "./visibility-selector";
@@ -15,10 +15,10 @@ type SuggestedActionsProps = {
 
 function PureSuggestedActions({ chatId, sendMessage }: SuggestedActionsProps) {
   const suggestedActions = [
-    "What are the advantages of using Next.js?",
-    "Write code to demonstrate Dijkstra's algorithm",
-    "Help me write an essay about Silicon Valley",
-    "What is the weather in San Francisco?",
+    { icon: Building2, text: "What services does Cognizant offer?" },
+    { icon: Cloud, text: "Summarize the key benefits of cloud migration" },
+    { icon: Code, text: "Help me write a business case for IT outsourcing" },
+    { icon: Lightbulb, text: "What are best practices for managing teams?" },
   ];
 
   return (
@@ -26,27 +26,31 @@ function PureSuggestedActions({ chatId, sendMessage }: SuggestedActionsProps) {
       className="grid w-full gap-2 sm:grid-cols-2"
       data-testid="suggested-actions"
     >
-      {suggestedActions.map((suggestedAction, index) => (
+      {suggestedActions.map(({ icon: Icon, text }, index) => (
         <motion.div
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-          initial={{ opacity: 0, y: 20 }}
-          key={suggestedAction}
-          transition={{ delay: 0.05 * index }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 20 }}
+            key={text}
+            transition={{ delay: 0.05 * index }}
+            className="h-full"
         >
-          <Suggestion
-            className="h-auto w-full whitespace-normal p-3 text-left"
+            <Suggestion
+            className="h-full w-full whitespace-normal rounded-sm p-3 text-left"
             onClick={(suggestion) => {
-              window.history.pushState({}, "", `/chat/${chatId}`);
-              sendMessage({
+                window.history.pushState({}, "", `/chat/${chatId}`);
+                sendMessage({
                 role: "user",
                 parts: [{ type: "text", text: suggestion }],
-              });
+                });
             }}
-            suggestion={suggestedAction}
-          >
-            {suggestedAction}
-          </Suggestion>
+            suggestion={text}
+            >
+            <div className="flex items-start gap-2">
+                <Icon className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
+                <span>{text}</span>
+            </div>
+            </Suggestion>
         </motion.div>
       ))}
     </div>
@@ -56,13 +60,8 @@ function PureSuggestedActions({ chatId, sendMessage }: SuggestedActionsProps) {
 export const SuggestedActions = memo(
   PureSuggestedActions,
   (prevProps, nextProps) => {
-    if (prevProps.chatId !== nextProps.chatId) {
-      return false;
-    }
-    if (prevProps.selectedVisibilityType !== nextProps.selectedVisibilityType) {
-      return false;
-    }
-
+    if (prevProps.chatId !== nextProps.chatId) return false;
+    if (prevProps.selectedVisibilityType !== nextProps.selectedVisibilityType) return false;
     return true;
   }
 );
